@@ -1,57 +1,108 @@
 using System;
+using System.Collections.Generic;
 
 namespace CSharpMastery.Topics.Topic16;
 
 /// <summary>
-/// Practical demonstrations for Topic 16: Delegates, Events and Lambdas
+/// Practical demonstrations for Topic 16: Delegates, Events & Lambdas
 /// </summary>
 public static class DelegatesEventsDemo
 {
-    // Custom Event Arguments
-    public class OrderEventArgs : EventArgs
-    {
-        public int OrderId { get; }
-        public double TotalAmount { get; }
+    // Custom delegate definition
+    public delegate void AlertHandler(string alertMessage, int severity);
 
-        public OrderEventArgs(int orderId, double total)
+    // Custom Event Arguments
+    public class IncidentEventArgs : EventArgs
+    {
+        public string Sector { get; }
+        public string IncidentDescription { get; }
+
+        public IncidentEventArgs(string sector, string description)
         {
-            OrderId = orderId;
-            TotalAmount = total;
+            Sector = sector;
+            IncidentDescription = description;
         }
     }
 
-    public class OrderProcessor
+    // Publisher Class
+    public class CentralDispatchStation
     {
-        // Standard event declaration
-        public event EventHandler<OrderEventArgs>? OrderCompleted;
+        // Standard event pattern: EventHandler<TEventArgs>
+        public event EventHandler<IncidentEventArgs>? IncidentReported;
 
-        public void ProcessOrder(int orderId, double amount)
+        public void BroadcastIncident(string sector, string description)
         {
-            Console.WriteLine($"Processing Order #{orderId} for {amount:C}...");
-            // Thread-safe event invocation
-            OrderCompleted?.Invoke(this, new OrderEventArgs(orderId, amount));
+            Console.WriteLine($"\n    • [Dispatch Tower] 🚨 Broadcasting incident in Sector '{sector}': {description}");
+            // Thread-safe invocation using null-conditional operator:
+            IncidentReported?.Invoke(this, new IncidentEventArgs(sector, description));
         }
     }
 
     public static void Run()
     {
         Console.WriteLine("\n=======================================================");
-        Console.WriteLine(" TOPIC 16: DELEGATES, EVENTS & LAMBDAS");
+        Console.WriteLine(" 📡 TOPIC 16: DELEGATES, EVENTS & FUNCTIONAL LAMBDAS");
         Console.WriteLine("=======================================================");
 
-        // 1. Built-in Action and Func delegates
-        Action<string> logMessage = msg => Console.WriteLine($"[Action Log]: {msg}");
-        Func<int, int, int> multiply = (a, b) => a * b;
+        // 1. Multicast Delegate Invocation List Inspection
+        Console.WriteLine("[1] Multicast Delegates & Invocation Lists:");
+        AlertHandler alertChannel = (msg, sev) => Console.WriteLine($"    • [Console Logger (Sev {sev})]: {msg}");
+        alertChannel += (msg, sev) => Console.WriteLine($"    • [Audit Telemetry (Sev {sev})]: Transmitted to cloud gateway.");
 
-        logMessage($"Func result of 7 * 8 = {multiply(7, 8)}");
+        // Inspecting internal invocation list:
+        Delegate[] subscribers = alertChannel.GetInvocationList();
+        Console.WriteLine($"    • Multicast delegate contains {subscribers.Length} registered subscriber methods.");
+        alertChannel.Invoke("Cooling pump pressure alert", 3);
 
-        // 2. Events & Subscriptions
-        var processor = new OrderProcessor();
-        processor.OrderCompleted += (sender, e) =>
+        // 2. The Functional Trinity: Action, Func, Predicate
+        Console.WriteLine("\n[2] The Standard Functional Trinity (Action, Func, Predicate):");
+        Action<string> logAction = message => Console.WriteLine($"    • Action<string> (Side-effect only): {message}");
+        Func<double, double, double> hypotenuseFunc = (a, b) => Math.Sqrt((a * a) + (b * b));
+        Predicate<int> isEvenPredicate = n => n % 2 == 0;
+
+        logAction("Testing Action invocation");
+        Console.WriteLine($"    • Func<double, double, double> Hypotenuse(3, 4) = {hypotenuseFunc(3, 4)}");
+        Console.WriteLine($"    • Predicate<int> IsEven(42) = {isEvenPredicate(42)}");
+
+        // 3. Anonymous Methods vs. Lambda Expressions
+        Console.WriteLine("\n[3] Anonymous Methods (delegate keyword) vs. Lambdas (=>):");
+        
+        // C# 2.0 Anonymous Method syntax:
+        Func<int, int> legacySquare = delegate (int x) { return x * x; };
+        
+        // Modern C# Lambda Expression syntax:
+        Func<int, int> modernSquare = x => x * x;
+
+        Console.WriteLine($"    • C# 2.0 Anonymous Method Result: {legacySquare(5)}");
+        Console.WriteLine($"    • Modern C# Lambda Result        : {modernSquare(5)}");
+
+        // 4. Publisher-Subscriber Event Pattern & Memory Leak Prevention
+        Console.WriteLine("\n[4] Events & Safe Unsubscription (Preventing Vampire Leaks):");
+        var station = new CentralDispatchStation();
+
+        EventHandler<IncidentEventArgs> handler = (sender, e) =>
         {
-            Console.WriteLine($"-> Notification received: Order #{e.OrderId} finished successfully for {e.TotalAmount:C}");
+            Console.WriteLine($"      -> [Ambulance Unit 10] Responding to Sector '{e.Sector}': {e.IncidentDescription}");
         };
 
-        processor.ProcessOrder(101, 249.99);
+        // Subscribe:
+        station.IncidentReported += handler;
+        station.BroadcastIncident("North District", "Transformer fire reported.");
+
+        // Unsubscribe: Cleans up memory reference from Publisher to Subscriber
+        station.IncidentReported -= handler;
+        Console.WriteLine("    • [Subscriber Cleanup] Ambulance Unit 10 successfully unsubscribed (-=).");
+        station.BroadcastIncident("South District", "False alarm."); // Handler will NOT execute!
+
+        // 5. Closures & Variable Hoisting
+        Console.WriteLine("\n[5] Closures & Variable Capture:");
+        int multiplier = 10; // Local stack variable
+        
+        // Lambda captures 'multiplier' from enclosing scope:
+        Func<int, int> multiplyByCaptured = x => x * multiplier;
+        Console.WriteLine($"    • Captured multiplier (10) * 5 = {multiplyByCaptured(5)}");
+
+        multiplier = 100; // Mutating outer variable alters captured state!
+        Console.WriteLine($"    • After mutating outer variable to 100: * 5 = {multiplyByCaptured(5)}");
     }
 }
