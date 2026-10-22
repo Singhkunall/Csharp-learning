@@ -17,11 +17,17 @@ A comprehensive, industry-aligned learning roadmap for **C# and the modern .NET 
 dotnet build
 ```
 
-### Run the Interactive Topic Runner
+### Run the Interactive C# Topic Runner
 ```powershell
 dotnet run --project Main
 ```
 *(Enter a topic number from `1` to `26` to run an isolated module, or press **Enter** to run the complete curriculum).*
+
+### Run the ASP.NET Core Basics Runner
+```powershell
+dotnet run --project ASP.NET-Core-Basics
+```
+*(Enter a module number from `1` to `12` or run the complete web API & application pipeline).*
 
 ### Run Automated Unit Tests (xUnit)
 ```powershell

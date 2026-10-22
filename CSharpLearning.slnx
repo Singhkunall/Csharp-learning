@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="main.Tests/main.Tests.csproj" />
   <Project Path="Main/Main.csproj" />
+  <Project Path="ASP.NET-Core-Basics/AspNetCoreBasics.csproj" />
   <Project Path="WebApplication1/WebApplication1.csproj" />
 </Solution>
