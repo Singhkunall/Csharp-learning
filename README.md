@@ -3,7 +3,7 @@
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/Language-C%23%2012%2F13-blue.svg)](https://learn.microsoft.com/dotnet/csharp/)
 [![Testing](https://img.shields.io/badge/Tested%20with-xUnit-green.svg)](https://xunit.net/)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
+[![Build](https://github.com/Singhkunall/Csharp-learning/actions/workflows/ci.yml/badge.svg)](https://github.com/Singhkunall/Csharp-learning/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
 A comprehensive, industry-aligned learning roadmap for **C# and the modern .NET ecosystem**. Every topic is organized into its own dedicated folder containing **in-depth theory, Mermaid architecture diagrams, comparison tables, and runnable practical code**.
