@@ -106,6 +106,27 @@ dotnet test
 
 ---
 
+## 🌐 Complete ASP.NET Core Basics Curriculum
+
+A deep architectural masterclass for building production-ready web APIs, MVC applications, and cloud-native microservices with ASP.NET Core:
+
+| # | Module | Theory & Architectural Diagrams | Practical Demo Simulation |
+|:---:|---|---|---|
+| **01** | **Introduction to ASP.NET Core** | [Module 01 README](ASP.NET-Core-Basics/01-Introduction/README.md) | [IntroductionDemo.cs](ASP.NET-Core-Basics/01-Introduction/IntroductionDemo.cs) |
+| **02** | **Creating Your First Project** | [Module 02 README](ASP.NET-Core-Basics/02-First-Project/README.md) | [FirstProjectDemo.cs](ASP.NET-Core-Basics/02-First-Project/FirstProjectDemo.cs) |
+| **03** | **Request Pipeline & Middleware** | [Module 03 README](ASP.NET-Core-Basics/03-Middleware/README.md) | [MiddlewareDemo.cs](ASP.NET-Core-Basics/03-Middleware/MiddlewareDemo.cs) |
+| **04** | **Routing and Endpoints** | [Module 04 README](ASP.NET-Core-Basics/04-Routing/README.md) | [RoutingDemo.cs](ASP.NET-Core-Basics/04-Routing/RoutingDemo.cs) |
+| **05** | **Building REST APIs** | [Module 05 README](ASP.NET-Core-Basics/05-REST-APIs/README.md) | [RestApiDemo.cs](ASP.NET-Core-Basics/05-REST-APIs/RestApiDemo.cs) |
+| **06** | **Dependency Injection** | [Module 06 README](ASP.NET-Core-Basics/06-Dependency-Injection/README.md) | [DependencyInjectionDemo.cs](ASP.NET-Core-Basics/06-Dependency-Injection/DependencyInjectionDemo.cs) |
+| **07** | **Configuration & Environments** | [Module 07 README](ASP.NET-Core-Basics/07-Configuration/README.md) | [ConfigurationDemo.cs](ASP.NET-Core-Basics/07-Configuration/ConfigurationDemo.cs) |
+| **08** | **Controllers and MVC** | [Module 08 README](ASP.NET-Core-Basics/08-MVC/README.md) | [MvcDemo.cs](ASP.NET-Core-Basics/08-MVC/MvcDemo.cs) |
+| **09** | **Database Integration (EF Core)** | [Module 09 README](ASP.NET-Core-Basics/09-Database-EF-Core/README.md) | [DatabaseEfCoreDemo.cs](ASP.NET-Core-Basics/09-Database-EF-Core/DatabaseEfCoreDemo.cs) |
+| **10** | **Authentication & Authorization** | [Module 10 README](ASP.NET-Core-Basics/10-Authentication/README.md) | [AuthDemo.cs](ASP.NET-Core-Basics/10-Authentication/AuthDemo.cs) |
+| **11** | **Testing and Debugging** | [Module 11 README](ASP.NET-Core-Basics/11-Testing/README.md) | [TestingDemo.cs](ASP.NET-Core-Basics/11-Testing/TestingDemo.cs) |
+| **12** | **Deployment and Performance** | [Module 12 README](ASP.NET-Core-Basics/12-Deployment/README.md) | [DeploymentDemo.cs](ASP.NET-Core-Basics/12-Deployment/DeploymentDemo.cs) |
+
+---
+
 ## 🐙 Push to GitHub
 
 To push this entire curriculum to your repository:
